@@ -41,12 +41,19 @@ class JsonRepository:
         return data_list
     
 
-    def delete(self, data):
+    def delete(self, data_id):
         data_list = self.read()
-        data_list.remove(data)
-        self.write(data_list)
+
+        for data in data_list:
+            if data.get("id") == data_id:
+                data_list.remove(data)
+                self.write(data_list)
+                return True
+        
+        return False
 
     
+
     def search_id(self,data_id):
         data_list = self.read()
 
