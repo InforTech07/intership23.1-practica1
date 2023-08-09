@@ -49,14 +49,14 @@ class Mouse(InputDevice):
     
     def delete_mouse(self):
         data = {
-            "name": self.name,
-            "brand": self.brand,
             "id": self.id,
-            "units": self.units
         }
         self.repository.delete(data)
         
-    def search_mouse(self, data):
+    def search_mouse(self):
+        data = {
+            "id": self.id,
+        }
         return self.repository.search(data)
     
     
@@ -101,14 +101,14 @@ class keyboard(InputDevice):
     
     def delete_keyboard(self):
         data = {
-            "name": self.name,
-            "brand": self.brand,
-            "id": self.id,
-            "units": self.units
+            "id": self.id
         }
         self.repository.delete(data)
         
     def search_keyboard(self, data):
+        data = {
+            "id": self.id
+        }
         return self.repository.search(data)
     
 #########Output Divace###### 
@@ -160,14 +160,14 @@ class Monitor(OutputDevice):
     
     def delete_monitor(self):
         data = {
-            "name": self.name,
-            "brand": self.brand,
             "id": self.id,
-            "units": self.units
         }
         self.repository.delete(data)
         
-    def search_monitor(self, data):
+    def search_monitor(self):
+        data = {
+            "id": self.id,
+        }
         return self.repository.search(data)
         
 class Speaker(OutputDevice):
@@ -211,14 +211,14 @@ class Speaker(OutputDevice):
     
     def delete_speaker(self):
         data = {
-            "name": self.name,
-            "brand": self.brand,
-            "id": self.id,
-            "units": self.units
+            "id" : self.id
         }
         self.repository.delete(data)
         
-    def search_speaker(self, data):
+    def search_speaker(self):
+        data = {
+            "id":self.id,
+        }
         return self.repository.search(data) 
 
 class Computer:
@@ -350,36 +350,12 @@ class Computer:
     
     def delete_computer(self):
         data = {
-            "name": self.name,
-            "brand": self.brand,
-            "mouse": {
-                "name": self.mouse.name,
-                "brand": self.mouse.brand,
-                "id": self.mouse.id,
-                "units": self.mouse.units
-            },
-            "keyboard": {
-                "name": self.keyboard.name,
-                "brand": self.keyboard.brand,
-                "id": self.keyboard.id,
-                "units": self.keyboard.units
-            },
-            "monitor": {
-                "name": self.monitor.name,
-                "brand": self.monitor.brand,
-                "id": self.monitor.id,
-                "units": self.monitor.units
-            },
-            "speaker": {
-                "name": self.speaker.name,
-                "brand": self.speaker.brand,
-                "id": self.speaker.id,
-                "units": self.speaker.units
-            },
-            "id": self.id,
-            "units" : self.units
+            "id": self.id
         }
         self.repository.delete(data)
         
-    def search(self, data):
+    def search(self):
+        data = {
+            "id":self.id
+        }
         return self.repository.search(data)
