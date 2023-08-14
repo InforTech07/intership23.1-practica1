@@ -9,121 +9,105 @@ from repository import JsonRepository
 # Input Devices
 class MouseController:
     def __init__(self) -> None:
-        self.respository = JsonRepository()
-        self.id = 0
-        self.input_devices =  "input_devices"
-        self.mouses = "mouses"
+        self.mouse_model = Mouse()
 
-    def get_mouses(self):
-        mouses = self.respository.get_all(self.input_devices, self.mouses)
+    def list_mouse(self):
+        mouses = self.mouse_model.list_mouse()
         return mouses
 
-    def create_mouse(self, name, brand):
-        self.id+=1 
-        mouse = Mouse(name, brand)
-        mouse.id = self.id
-        self.respository.add(mouse.__dict__, self.input_devices, self.mouses)
-        return "Created successfully!"
+    def create_mouse(self, name, brand, units):
+        mouse = self.mouse_model.Mouse(name, brand, units)
+        msg = mouse.save_mouse()
+        return msg
 
-    def get_mouse(self, id):
-        mouse = self.respository.get(id, self.input_devices, self.mouses)
+    def search_id(self, id):
+        mouse = self.mouse_model.search_id(id)
         return mouse
 
-    def update_mouse(self, id, name, bread):
-        self.respository.update(id, name, bread, self.input_devices, self.mouses)
-        return "Updated succesfully!"
+    def update_mouse(self, id, name, bread, units):
+        msg = self.mouse_model.update_mouse(id, name, bread, units)
+        return msg
 
-    def delete_mouse(self, id):
-        self.respository.delete(id, self.input_devices, self.mouses)
-        return "Deleted successfully!"
+    def delete(self, id):
+        msg = self.mouse_model.delete(id)
+        return msg
     
 class KeyboardController:
     def __init__(self) -> None:
-        self.respository = JsonRepository()
-        self.id = 0
-        self.input_devices =  "input_devices"
-        self.keyboards = "keyboards"
+        self.keyboard_model = Keyboard()
 
     def get_keyboards(self):
-        keyboards = self.respository.get_all(self.input_devices, self.keyboards)
+        keyboards = self.keyboard_model.list_keyboard()
         return keyboards
 
-    def create_keyboard(self, name, brand):
-        self.id+=1 
-        keyboard = Keyboard(name, brand)
-        keyboard.id = self.id
-        self.respository.add(keyboard.__dict__, self.input_devices, self.keyboards)
-        return "Created successfully!"
+    def create_keyboard(self, name, brand, units):
+        keyboard = Keyboard(name, brand, units)
+        msg = keyboard.save_mouse()
+        return msg
 
     def get_keyboard(self, id):
-        keyboard = self.respository.get(id, self.input_devices, self.keyboards)
+        keyboard = self.keyboard_model.search_id(id)
         return keyboard
 
     def update_keyboard(self, id, name, bread):
-        self.respository.update(id, name, bread, self.input_devices, self.keyboards)
-        return "Updated succesfully!"
+        msg = self.keyboard_model.update_mouse(id, name, bread)
+        return msg
 
     def delete_keyboard(self, id):
-        self.respository.delete(id, self.input_devices, self.keyboards)
-        return "Deleted successfully!"
+        msg = self.keyboard_model.delete(id)
+        return msg
 
 # Output Devices
 class MonitorController:
     def __init__(self) -> None:
-        self.respository = JsonRepository()
-        self.id = 0
-        self.output_devices =  "output_devices"
-        self.monitors = "monitors"
+        self.mouse_model = JsonRepository()
 
     def get_monitors(self):
-        monitors = self.respository.get_all(self.output_devices, self.monitors)
+        monitors = self.mouse_model.list_keyboard()
         return monitors
 
-    def create_monitor(self, name, brand):
+    def create_monitor(self, name, brand, units):
         self.id+=1 
-        monitor = Monitor(name, brand)
+        monitor = Monitor(name, brand, units)
         monitor.id = self.id
-        self.respository.add(monitor.__dict__, self.output_devices, self.monitors)
-        return "Created successfully!"
+        msg = self.mouse_model.save_keyboard()
+        return msg
 
     def get_monitor(self, id):
-        monitor = self.respository.get(id, self.output_devices, self.monitors)
+        monitor = self.mouse_model.search_id(id)
         return monitor
 
-    def update_monitor(self, id, name, bread):
-        self.respository.update(id, name, bread, self.output_devices, self.monitors)
+    def update_monitor(self, id, name, bread, units):
+        self.mouse_model.update_mouse(id, name, bread, units)
         return "Updated succesfully!"
 
     def delete_monitor(self, id):
-        self.respository.delete(id, self.output_devices, self.monitors)
+        self.mouse_model.delete(id, )
         return "Deleted successfully!"
 
 class SpeakerController:
     def __init__(self) -> None:
-        self.respository = JsonRepository()
-        self.id = 0
-        self.output_devices =  "output_devices"
-        self.speakers = "speakers"
+        self.speaker_model = Speaker()
 
     def get_speakers(self):
-        speakers = self.respository.get_all(self.output_devices, self.speakers)
+        speakers = self.speaker_model.list_speaker()
         return speakers
 
     def create_speaker(self, name, brand):
         self.id+=1 
         speaker = Speaker(name, brand)
         speaker.id = self.id
-        self.respository.add(speaker.__dict__, self.output_devices, self.speakers)
-        return "Created successfully!"
+        msg = self.speaker_model.save_speaker()
+        return msg
 
     def get_speaker(self, id):
-        speaker = self.respository.get(id, self.output_devices, self.speakers)
+        speaker = self.speaker_model.search_id(id)
         return speaker
 
-    def update_speaker(self, id, name, bread):
-        self.respository.update(id, name, bread, self.output_devices, self.speakers)
-        return "Updated succesfully!"
+    def update_speaker(self, id, name, bread, units):
+        msg = self.speaker_model.update_speaker(id, name, bread, units)
+        return msg
 
     def delete_speaker(self, id):
-        self.respository.delete(id, self.output_devices, self.speakers)
-        return "Deleted successfully!"
+        msg = self.speaker_model.delete(id)
+        return msg
