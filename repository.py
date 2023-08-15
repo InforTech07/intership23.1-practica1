@@ -22,8 +22,9 @@ class JsonRepository:
 
     def add(self, data):
         data_list = self.read()
-        data_list.append(data)
-        return self.write(data_list)
+        data_json=json.dumps(data) #Convert python object to json
+        data_list.append(data_json)
+        self.write(data_list)
         
 
     def update(self,old_data,new_data):
@@ -40,16 +41,27 @@ class JsonRepository:
         return data_list
     
 
-    def delete(self, data):
+    def delete(self, data_id):
         data_list = self.read()
-        data_list.remove(data)
-        self.write(data_list)
+
+        for data in data_list:
+            if data.get("id") == data_id:
+                data_list.remove(data)
+                self.write(data_list)
+                return True
+        
+        return False
 
     
-    def search(self,data):
-        data_list = self.read()
-        return data in data_list   #returns true or false if it finds the data
 
+    def search_id(self,data_id):
+        data_list = self.read()
+
+        for data in data_list:
+            if data.get("id") == data_id:
+                return data
+            
+        return  "id not found"
 
 
     
